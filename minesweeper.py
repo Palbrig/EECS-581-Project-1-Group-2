@@ -159,13 +159,28 @@ def set_tile_state(tile):
     for x in range(3):
         for y in range(3):
             print("checking[", board_grid_x + x, ",", board_grid_y + y, "]")
-            if board[board_grid_x + x][board_grid_y + y].has_bomb:
-                tile.state += 1
-                
-                print("Setting tilestate to: ", tile.state)
+            if is_valid_index(board_grid_x + x, board_grid_y + y):
+                if board[board_grid_x + x][board_grid_y + y].has_bomb:
+                    tile.state += 1
+                    
+                    print("Setting tilestate to: ", tile.state)
 
-                board_grid_x += 1
-                board_grid_y += 1
+                    board_grid_x += 1
+                    board_grid_y += 1
+
+# helper function
+# boolean function that determines if an index is valid or not
+
+def is_valid_index(x, y) -> bool:
+    if x >= boardSize or y >= boardSize:
+        print("x/y greater than board limit returning false ")
+        return False
+    if x < 0 or y < 0:
+        print("x/y is less than 0")
+        return False
+            
+    print("returning true ")
+    return True
 
 # Draw the board for the user
 
